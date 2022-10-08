@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configurationDescriptor version="84">
+  <projectmakefile>Makefile</projectmakefile>
+  <confs>
+    <conf name="Debug" type="1">
+      <toolsSet>
+        <developmentServer>localhost</developmentServer>
+        <platform>2</platform>
+      </toolsSet>
+      <dbx_gdbdebugger version="1">
+        <gdb_pathmaps>
+        </gdb_pathmaps>
+        <gdb_interceptlist>
+          <gdbinterceptoptions gdb_all="false" gdb_unhandled="true" gdb_unexpected="true"/>
+        </gdb_interceptlist>
+        <gdb_options>
+          <DebugOptions>
+          </DebugOptions>
+        </gdb_options>
+        <gdb_buildfirst gdb_buildfirst_overriden="false" gdb_buildfirst_old="false"/>
+      </dbx_gdbdebugger>
+      <nativedebugger version="1">
+        <engine>gdb</engine>
+      </nativedebugger>
+      <runprofile version="9">
+        <runcommandpicklist>
+          <runcommandpicklistitem>"${OUTPUT_PATH}"</runcommandpicklistitem>
+          <runcommandpicklistitem>"${OUTPUT_PATH}" test.txt out.txt</runcommandpicklistitem>
+          <runcommandpicklistitem>"${OUTPUT_PATH}" test.txt test2D.txt</runcommandpicklistitem>
+          <runcommandpicklistitem>"${OUTPUT_PATH}" QFT6ND.txt QFT62D.txt</runcommandpicklistitem>
+          <runcommandpicklistitem>"${OUTPUT_PATH}" ./runbenchmarkQFT6ND.txt QFT62D.txt</runcommandpicklistitem>
+          <runcommandpicklistitem>"${OUTPUT_PATH}" ./runBenchmark/qlib/QFT6ND.txt QFT62D.txt</runcommandpicklistitem>
+          <runcommandpicklistitem>"${OUTPUT_PATH}" ./runBenchmark/qlib/QFT4.txt QFT42D.txt</runcommandpicklistitem>
+          <runcommandpicklistitem>"${OUTPUT_PATH}" ./runBenchmark/qlib/QFT8.txt QFT8_2D.txt</runcommandpicklistitem>
+        </runcommandpicklist>
+        <runcommand>"${OUTPUT_PATH}" ./runBenchmark/qlib/QFT8.txt QFT8_2D.txt</runcommand>
+        <rundir></rundir>
+        <buildfirst>true</buildfirst>
+        <console-type>1</console-type>
+        <terminal-type>0</terminal-type>
+        <remove-instrumentation>0</remove-instrumentation>
+        <environment>
+        </environment>
+      </runprofile>
+    </conf>
+    <conf name="Release" type="1">
+      <toolsSet>
+        <developmentServer>localhost</developmentServer>
+        <platform>2</platform>
+      </toolsSet>
+      <dbx_gdbdebugger version="1">
+        <gdb_pathmaps>
+        </gdb_pathmaps>
+        <gdb_interceptlist>
+          <gdbinterceptoptions gdb_all="false" gdb_unhandled="true" gdb_unexpected="true"/>
+        </gdb_interceptlist>
+        <gdb_options>
+          <DebugOptions>
+          </DebugOptions>
+        </gdb_options>
+        <gdb_buildfirst gdb_buildfirst_overriden="false" gdb_buildfirst_old="false"/>
+      </dbx_gdbdebugger>
+      <nativedebugger version="1">
+        <engine>gdb</engine>
+      </nativedebugger>
+      <runprofile version="9">
+        <runcommandpicklist>
+          <runcommandpicklistitem>"${OUTPUT_PATH}" ./runBenchmark/benchmarkFT2q/hwb6ND.txt out.txt</runcommandpicklistitem>
+          <runcommandpicklistitem>"${OUTPUT_PATH}" ./runBenchmark/benchmarkFT2q/rd84ND.txt out.txt</runcommandpicklistitem>
+          <runcommandpicklistitem>"${OUTPUT_PATH}" ./runBenchmark/benchmarkFT2q/sym9ND.txt out.txt</runcommandpicklistitem>
+          <runcommandpicklistitem>"${OUTPUT_PATH}" ./runBenchmark/qlib/QFT8.txt QFT8_2D.txt</runcommandpicklistitem>
+          <runcommandpicklistitem>"${OUTPUT_PATH}" ./runBenchmark/qlib/QFT8.txt QFT8_2D.txt 4 4 4</runcommandpicklistitem>
+          <runcommandpicklistitem>"${OUTPUT_PATH}" ./runBenchmark/qlib/QFT8.txt QFT8_2D.txt 4 4 </runcommandpicklistitem>
+          <runcommandpicklistitem>"${OUTPUT_PATH}" ./runBenchmark/qlib/QFT8.txt QFT8_2D.txt 4 4</runcommandpicklistitem>
+          <runcommandpicklistitem>"${OUTPUT_PATH}" ./Log/QFT8.txt QFT8_2D.txt </runcommandpicklistitem>
+          <runcommandpicklistitem>"${OUTPUT_PATH}" ./Log/QFT6.txt QFT6_2D.txt</runcommandpicklistitem>
+          <runcommandpicklistitem>"${OUTPUT_PATH}" ./QFT6.txt QFT6_2D.txt</runcommandpicklistitem>
+        </runcommandpicklist>
+        <runcommand>"${OUTPUT_PATH}" ./QFT6.txt QFT6_2D.txt</runcommand>
+        <rundir>/home/chiachun/Dropbox/PAQCS/Log</rundir>
+        <buildfirst>true</buildfirst>
+        <console-type>1</console-type>
+        <terminal-type>0</terminal-type>
+        <remove-instrumentation>0</remove-instrumentation>
+        <environment>
+        </environment>
+      </runprofile>
+    </conf>
+  </confs>
+</configurationDescriptor>

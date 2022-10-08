@@ -1,0 +1,35 @@
+# reversed order gate list of: after_pre_syn.txt
+# ***OUTPUT*** Netlist file
+# Created by ChiaChun
+.qubit 6
+.pmd ???
+.global_phase 0
+qubit q0
+qubit q1
+qubit q2
+qubit q3
+qubit q4
+qubit q5
+.begin
+H q0
+CP q1 q0 2
+CP q2 q0 1
+CP q3 q0 0.5
+CP q4 q0 0.25
+CP q5 q0 0.125
+H q1
+CP q2 q1 2
+CP q3 q1 1
+CP q4 q1 0.5
+CP q5 q1 0.25
+H q2
+CP q3 q2 2
+CP q4 q2 1
+CP q5 q2 0.5
+H q3
+CP q4 q3 2
+CP q5 q3 1
+H q4
+CP q5 q4 2
+H q5
+.end
