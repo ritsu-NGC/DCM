@@ -1,11 +1,10 @@
 import pythonds
 from qiskit import QuantumRegister, ClassicalRegister, QuantumCircuit
 from Graph import *
-
+from distance_cal import *
 
 def get_circuit(circuit):
     num_qubit = len(circuit.qubits)
-
     gates_ctl = []
     gates_tar = []
     gate_graph = Graph()
@@ -20,6 +19,39 @@ def get_circuit(circuit):
 
     return gate_graph
 
+def circuit_txt(name,circuit):
+    # print(circuit.qubits)
+    num_qubits = len(circuit.qubits)
+    # print(num_qubits)
+    str1 = name + ".txt"
+    str2 = name + "_out.txt"
+    with open(str1,"w") as w:
+        w.write(".qubit {0}\n".format(num_qubits))
+        for i in range(num_qubits):
+            w.write("qubit q{0}\n".format(i))
+        w.write(".begin\n")
+        for gate in circuit.data:
+            if gate.operation.name == "cx":
+                w.write("CNOT q{0} q{1}\n".format(gate.qubits[0].index,gate.qubits[1].index))
+        w.write(".end\n")
+    open(str2,"w")
+
+def get_new_cir(new_cir,old_cir):
+    r1 = open(new_cir,"r")
+    data = r1.read().split()
+    print(data)
+    r2 = open(old_cir, "r")
+    w = open("Mnew_cir.txt","w")
+    for line in r2.readlines():
+        gate = line.split()
+        if gate[0] == "CNOT":
+            # print("is cnot gate")
+            gate[1] = "q" + str(data.index(gate[1]))
+            gate[2] = "q" + str(data.index(gate[2]))
+            str_gate = gate[0] + " " + gate[1] + " " +  gate[2] + "\n"
+            w.write(str_gate)
+
+
 
 if __name__ == '__main__':
     # g = Graph()
@@ -29,14 +61,31 @@ if __name__ == '__main__':
     # g.addEdge(5,1)
     # g.addEdge(1,5)
     # g.showGraph()
-    qft = QuantumCircuit(5)
+    qft = QuantumCircuit(9)
+    qft.cx(0,1)
     qft.cx(0,3)
-    qft.cx(1,4)
-    qft.cx(0,3)
-    qft.cx(4,3)
-    qft.cx(0,3)
+    qft.cx(0,5)
+    qft.cx(0,7)
+    qft.cx(1,3)
+    qft.cx(2,5)
+    qft.cx(2,6)
+    qft.cx(2,7)
+    qft.cx(4,6)
+    qft.cx(4,7)
+    qft.cx(8,0)
+    qft.cx(8,1)
+    qft.cx(6,3)
+    qft.cx(6,5)
+    qft.cx(5,1)
+    qft.cx(5,3)
+    qft.cx(4,1)
+    qft.cx(2,1)
+    # print(qft.data)
+    circuit_txt("test_new",qft)
+    get_new_cir("new.txt","test_new.txt")
+    print("原距离",get_dis("test_new.txt"))
+    print("现距离",get_dis("Mnew_cir.txt"))
 
-    get_circuit(qft).showGraph()
 
 
 
