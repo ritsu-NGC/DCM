@@ -20,7 +20,9 @@ def get_dis(address):
         gate = line.split()
         if gate[0] == "CNOT":
             # print("is cnot gate")
+            # print(gate[1][1],gate[2][1])
             tol_dis = tol_dis + distance_cal(gate[1][1],gate[2][1])
+            print(tol_dis)
     return tol_dis
 
 

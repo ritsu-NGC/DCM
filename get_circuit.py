@@ -39,15 +39,21 @@ def circuit_txt(name,circuit):
 def get_new_cir(new_cir,old_cir):
     r1 = open(new_cir,"r")
     data = r1.read().split()
-    print(data)
+    print("错排列：", data)
+    mid = data[3]
+    data[3] = data[5]
+    data[5] = mid
+    print("新排列：",data)
     r2 = open(old_cir, "r")
     w = open("Mnew_cir.txt","w")
     for line in r2.readlines():
         gate = line.split()
         if gate[0] == "CNOT":
-            # print("is cnot gate")
+            # print(gate)
             gate[1] = "q" + str(data.index(gate[1]))
             gate[2] = "q" + str(data.index(gate[2]))
+            # print(data.index(gate[1]),data.index(gate[2]))
+            # print("改：",gate)
             str_gate = gate[0] + " " + gate[1] + " " +  gate[2] + "\n"
             w.write(str_gate)
 
