@@ -21,18 +21,30 @@ def gen_circuit_ex(qubit, address):
             con = int(list[1][1])
             tar = int(list[2][1])
             gen_mat = cnotmat(gen_mat,con,tar)
-
-
-
     return gen_mat
+def Matrix_trans(matrix):
+    matrix_n = []
+    for line in matrix:
+        eles = []
+        for i in line:
+            eles.append(i)
+            # print(type(i))
+        matrix_n.append(eles)
+
+    return matrix_n
 
 if __name__ == '__main__':
     qnum = 9        #量子ビット数
     cnot_count = 3 #CNOTゲート数
     address = "test_new.txt"
     address2 = "Mnew_cir.txt"
-    print(gen_circuit_ex(qnum,address))
-    print("=================================")
     print(gen_circuit_ex(qnum,address2))
+    for item in Matrix_trans(gen_circuit_ex(qnum,address2)):
+        print(item)
+
+    print(Matrix_trans(gen_circuit_ex(qnum,address2)))
+
+    # print("=================================")
+    # print(gen_circuit_ex(qnum,address2))
 
 

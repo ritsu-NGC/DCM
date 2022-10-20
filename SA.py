@@ -23,6 +23,14 @@ def dis_cal(placement):# 函数优化问题
             # print(tol_dis)
 
     return tol_dis,placement
+def GetMin(all):
+    min = 1000000
+    output = []
+    for item in all:
+        if min > item[0]:
+            min = item[0]
+            output = [min,item[1]]
+    return output
 class SA:
     def __init__(self, initial_place,initial_dis, iter=3, T0=2, Tf=0.1, alpha=0.99):
         self.start_place = initial_place
@@ -47,14 +55,7 @@ class SA:
         while True:
             return random.sample(range(0,num_qubit),2)
 
-    def GetMin(self,all):
-        min = 1000000
-        output = []
-        for item in all:
-            if min > item[0]:
-                min = item[0]
-                output = [min,item[1]]
-        return output
+
 
 
 
@@ -137,11 +138,11 @@ class SA:
                     if min > res[0]:
                         min = res[0]
                         place_wait = res[1]
-                print("当前轮最优解：",min,place_wait)
-                if min == dis_cal(place_wait)[0]:
-                    print("yes")
-                else:
-                    print("wrong")
+                # print("当前轮最优解：",min,place_wait)
+                # if min == dis_cal(place_wait)[0]:
+                #     print("yes")
+                # else:
+                #     print("wrong")
                 all_accpet.append([copy.deepcopy(min),copy.deepcopy(place_wait)])
                 # print("all_acc:",all_accpet)
                 self.start_res = copy.deepcopy(min)
@@ -154,7 +155,7 @@ class SA:
 
 if __name__ == '__main__':
     # print(dis_cal(['q1', 'q0', 'q8', 'q2', 'q3', 'q5', 'q4', 'q6', 'q7']))
-    sa = SA(['q1', 'q7', 'q8', 'q5', 'q3', 'q2', 'q4', 'q6', 'q0'],36)
+    sa = SA(['q8', 'q5', 'q2', 'q6', 'q1', 'q7', 'q3', 'q0', 'q4'],4)
 
     # for item in sa.run():
     #     print("结果：",item)
@@ -162,8 +163,7 @@ if __name__ == '__main__':
     #         print("yes")
     #     else:
     #         print("wrong")
-    print(sa.GetMin(sa.run()))
-
+    print(GetMin(sa.run()))
     # print(sa.run())
     # for inter in sa.run():
     #     print(inter)

@@ -9,22 +9,14 @@ qubit q6
 qubit q7
 qubit q8
 .begin
-CNOT q0 q1
-CNOT q0 q3
-CNOT q0 q5
-CNOT q0 q7
+CNOT q0 q2
+CNOT q3 q6
+CNOT q7 q3
+CNOT q6 q7
+CNOT q5 q4
+CNOT q8 q4
+CNOT q7 q4
+CNOT q6 q4
+CNOT q4 q2
 CNOT q1 q3
-CNOT q2 q5
-CNOT q2 q6
-CNOT q2 q7
-CNOT q4 q6
-CNOT q4 q7
-CNOT q8 q0
-CNOT q8 q1
-CNOT q6 q3
-CNOT q6 q5
-CNOT q5 q1
-CNOT q5 q3
-CNOT q4 q1
-CNOT q2 q1
 .end

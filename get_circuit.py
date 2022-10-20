@@ -87,9 +87,9 @@ if __name__ == '__main__':
     qft.cx(4,1)
     qft.cx(2,1)
     # print(qft.data)
-    circuit_txt("test_new",qft)
+    # circuit_txt("test_new",qft)
     get_new_cir("new.txt","test_new.txt")
-    print("原距离",get_dis("test_new.txt"))
+    # print("距离:",get_dis("test_new.txt"))
     print("现距离",get_dis("Mnew_cir.txt"))
 
 
