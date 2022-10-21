@@ -5,8 +5,17 @@ from Steriner_Gauss import *
 def get_initial(address_initial):
     r1 = open(address_initial,"r")
     data = r1.read().split()
-    mid = data[3]
-    data[3] = data[5]
+    mid = data[4]
+    data[4] = data[7]
+    data[7] = mid
+    mid = data[15]
+    data[15] = data[12]
+    data[12] = mid
+    mid = data[13]
+    data[13] = data[14]
+    data[14] = mid
+    mid = data[6]
+    data[6] = data[5]
     data[5] = mid
     print("SA初始排列：",data)
     return data
@@ -42,22 +51,22 @@ def get_new_cir_list(list,old_cir):
 
 if __name__ == '__main__':
     # 获取SA的初始解
-    address_initial = "test_new_out.txt (13).layout"
+    address_initial = "test_new_out.txt (8).layout"
     initial_place = get_initial(address_initial)
-    initial_dis = get_dis("Mnew_cir.txt")
-    print("SA初始距离", get_dis("Mnew_cir.txt"))
-    # 开始S
+    initial_dis = get_dis_16bit("Mnew_cir.txt")
+    print("SA初始距离", get_dis_16bit("Mnew_cir.txt"))
+    # 开始SA
     sa = SA(initial_place,initial_dis)
     # 输出距离和新排列
-    SA_dis_pla = GetMin(sa.run())
+    SA_dis_pla = GetMin(sa.run_16bit())
     print("SA后最优解")
     print(SA_dis_pla)
     SA_pla = SA_dis_pla[1]
     get_new_cir_list(SA_pla,"test_new.txt")
-    print("SA得到新回路的距离：", get_dis("Mnew_cir.txt"))
+    print("SA得到新回路的距离：", get_dis_16bit("Mnew_cir.txt"))
     print("获取SA回路矩阵------------------------------------------------------------------------")
-    qnum = 9        #量子ビット数
-    cnot_count = 3 #CNOTゲート数
+    qnum = 16        #量子ビット数
+    cnot_count = 8 #CNOTゲート数
     address = "Mnew_cir.txt"
     # 输出记录方便
     for item in Matrix_trans(gen_circuit_ex(qnum, address)):
@@ -65,8 +74,8 @@ if __name__ == '__main__':
     matrix_initial = Matrix_trans(gen_circuit_ex(qnum, address))
 
     print("steiner gauss====------------------------------------------------------------------------")
-    n = 9
-    count = 0
+    n = 16
+    count = 8
     data = np.array(matrix_initial)
     print(data)
     targets = []
@@ -128,5 +137,6 @@ if __name__ == '__main__':
     print("CNOTゲートの計数:", count, trans)
     print("単位行列:")
     print(data)
+
 
 

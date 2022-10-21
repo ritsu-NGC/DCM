@@ -18,8 +18,8 @@ def gen_circuit_ex(qubit, address):
     for line in  read_gates.readlines():
         list = line.split()
         if list[0] == "CNOT":
-            con = int(list[1][1])
-            tar = int(list[2][1])
+            con = int(list[1].strip("q"))
+            tar = int(list[2].strip("q"))
             gen_mat = cnotmat(gen_mat,con,tar)
     return gen_mat
 def Matrix_trans(matrix):

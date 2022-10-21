@@ -57,6 +57,36 @@ def get_new_cir(new_cir,old_cir):
             str_gate = gate[0] + " " + gate[1] + " " +  gate[2] + "\n"
             w.write(str_gate)
 
+def get_new_cir_16bit(new_cir,old_cir):
+    r1 = open(new_cir,"r")
+    data = r1.read().split()
+    print("错排列：", data)
+    mid = data[4]
+    data[4] = data[7]
+    data[7] = mid
+    mid = data[15]
+    data[15] = data[12]
+    data[12] = mid
+    mid = data[13]
+    data[13] = data[14]
+    data[14] = mid
+    mid = data[6]
+    data[6] = data[5]
+    data[5] = mid
+
+    print("新排列：",data)
+    r2 = open(old_cir, "r")
+    w = open("Mnew_cir.txt","w")
+    for line in r2.readlines():
+        gate = line.split()
+        if gate[0] == "CNOT":
+            # print(gate)
+            gate[1] = "q" + str(data.index(gate[1]))
+            gate[2] = "q" + str(data.index(gate[2]))
+            # print(data.index(gate[1]),data.index(gate[2]))
+            # print("改：",gate)
+            str_gate = gate[0] + " " + gate[1] + " " +  gate[2] + "\n"
+            w.write(str_gate)
 
 
 if __name__ == '__main__':
@@ -88,9 +118,9 @@ if __name__ == '__main__':
     qft.cx(2,1)
     # print(qft.data)
     # circuit_txt("test_new",qft)
-    get_new_cir("new.txt","test_new.txt")
+    get_new_cir_16bit("test_new_out.txt (18).layout","test_new.txt")
     # print("距离:",get_dis("test_new.txt"))
-    print("现距离",get_dis("Mnew_cir.txt"))
+    # print("现距离",get_dis("Mnew_cir.txt"))
 
 
 
