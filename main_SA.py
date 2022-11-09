@@ -42,7 +42,7 @@ def get_new_cir_list(list,old_cir):
 
 if __name__ == '__main__':
     # 获取SA的初始解
-    address_initial = "test_new_out.txt (13).layout"
+    address_initial = "test_new_out.txt (4).layout"
     initial_place = get_initial(address_initial)
     initial_dis = get_dis("Mnew_cir.txt")
     print("SA初始距离", get_dis("Mnew_cir.txt"))
@@ -57,7 +57,7 @@ if __name__ == '__main__':
     print("SA得到新回路的距离：", get_dis("Mnew_cir.txt"))
     print("获取SA回路矩阵------------------------------------------------------------------------")
     qnum = 9        #量子ビット数
-    cnot_count = 3 #CNOTゲート数
+    cnot_count = 18 #CNOTゲート数
     address = "Mnew_cir.txt"
     # 输出记录方便
     for item in Matrix_trans(gen_circuit_ex(qnum, address)):
@@ -66,7 +66,7 @@ if __name__ == '__main__':
 
     print("steiner gauss====------------------------------------------------------------------------")
     n = 9
-    count = 0
+    count = 18
     data = np.array(matrix_initial)
     print(data)
     targets = []

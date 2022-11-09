@@ -1,0 +1,33 @@
+CNOT q3 q2
+
+CNOT q6 q2
+
+CNOT q6 q7
+
+CNOT q0 q2
+
+CNOT q3 q7
+
+CNOT q7 q4
+
+CNOT q2 q4
+
+CNOT q2 q0
+
+CNOT q7 q6
+
+CNOT q5 q4
+
+CNOT q6 q8
+
+CNOT q1 q4
+
+CNOT q8 q6
+
+CNOT q4 q2
+
+CNOT q4 q1
+
+CNOT q1 q6
+
+CNOT q3 q1

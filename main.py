@@ -10,12 +10,12 @@ if __name__ == '__main__':
     # 并输出生成了那几个门
     print("生成随机初始回路，计算距离------------------------------------------------------------------------")
     # 修改产生的门的数量
-    Circuit_txt(9,10)
+    Circuit_txt(9,18)
     print("原电路距离和:", get_dis("test_new.txt"))
     # 获取原电路矩阵
     print("获取初始回路矩阵------------------------------------------------------------------------")
     qnum = 9        #量子ビット数
-    cnot_count = 3 #CNOTゲート数
+    cnot_count = 18 #CNOTゲート数
     address = "test_new.txt"
     # 输出记录方便
     for item in Matrix_trans(gen_circuit_ex(qnum, address)):
@@ -28,6 +28,7 @@ if __name__ == '__main__':
     n = 9
     count = 0
     data = np.array(matrix_initial)
+    print(matrix_initial)
     print(data)
     targets = []
     trans = []

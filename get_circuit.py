@@ -1,5 +1,5 @@
 import pythonds
-from qiskit import QuantumRegister, ClassicalRegister, QuantumCircuit
+from qiskit import *
 from Graph import *
 from distance_cal import *
 
@@ -98,29 +98,51 @@ if __name__ == '__main__':
     # g.addEdge(1,5)
     # g.showGraph()
     qft = QuantumCircuit(9)
-    qft.cx(0,1)
-    qft.cx(0,3)
-    qft.cx(0,5)
-    qft.cx(0,7)
-    qft.cx(1,3)
-    qft.cx(2,5)
-    qft.cx(2,6)
-    qft.cx(2,7)
-    qft.cx(4,6)
-    qft.cx(4,7)
-    qft.cx(8,0)
-    qft.cx(8,1)
-    qft.cx(6,3)
-    qft.cx(6,5)
-    qft.cx(5,1)
-    qft.cx(5,3)
-    qft.cx(4,1)
-    qft.cx(2,1)
+
+    # circ = QuantumCircuit(3)
+    # circ.cx(0, 1)
+    # circ.cx(0, 2)
+    # print(circ.draw())
+
+    # qft.cx(0,1)
+    # qft.cx(0,3)
+    # qft.cx(0,5)
+    # qft.cx(0,7)
+    # qft.cx(1,3)
+    # qft.cx(2,5)
+    # qft.cx(2,6)
+    # qft.cx(2,7)
+    # qft.cx(4,6)
+    # qft.cx(4,7)
+    # qft.cx(8,0)
+    # qft.cx(8,1)
+    # qft.cx(6,3)
+    # qft.cx(6,5)
+    # qft.cx(5,1)
+    # qft.cx(5,3)
+    # qft.cx(4,1)
+    # qft.cx(2,1)
     # print(qft.data)
     # circuit_txt("test_new",qft)
-    get_new_cir_16bit("test_new_out.txt (18).layout","test_new.txt")
+    # get_new_cir_16bit("test_new_out.txt (18).layout","test_new.txt")
     # print("距离:",get_dis("test_new.txt"))
     # print("现距离",get_dis("Mnew_cir.txt"))
+    r = open("Mnew_cir.txt","r")
+    # print(r.read())
+    gate_list = r.readlines()
+    for item in gate_list:
+        # print(item)
+        # print(type(item))
+        gate =item.split()
+        con = int(gate[1].strip("q"))
+        tar = int(gate[2].strip("q"))
+        # print(con,tar)
+        qft.cx(con,tar)
+    print(qft.draw())
+
+
+
+
 
 
 

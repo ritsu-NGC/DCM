@@ -7,14 +7,14 @@ if __name__ == '__main__':
     # 将placement算法得到的新回路
     # 计算距离
     # 生成矩阵
-    address_placement = "test_new_out.txt (13).layout" # 新placement文件名
+    address_placement = "test_new_out.txt (5).layout" # 新placement文件名
     get_new_cir(address_placement, "test_new.txt")
     # 计算距离
     print("placement得到新回路的距离", get_dis("Mnew_cir.txt"))
     # 生成placement新回路的矩阵
     print("获取placement回路矩阵------------------------------------------------------------------------")
     qnum = 9        #量子ビット数
-    cnot_count = 3 #CNOTゲート数
+    cnot_count = 18 #CNOTゲート数
     address = "Mnew_cir.txt"
     # 输出记录方便
     for item in Matrix_trans(gen_circuit_ex(qnum, address)):
@@ -23,7 +23,7 @@ if __name__ == '__main__':
 
     print("steiner gauss====------------------------------------------------------------------------")
     n = 9
-    count = 0
+    count = 18
     data = np.array(matrix_initial)
     print(data)
     targets = []
