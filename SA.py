@@ -4,9 +4,10 @@ import math
 import random
 import copy
 
-def dis_cal(placement):# 函数优化问题
+def dis_cal(placement,ads):# 函数优化问题
     # print("new placement:",placement)
-    r2 = open("test_new.txt", "r")
+    # r2 = open("test_new.txt", "r")
+    r2 = open(ads, "r")
     tol_dis = 0
     # w = open("Mnew_cir.txt", "w")
     for line in r2.readlines():
@@ -56,7 +57,7 @@ def GetMin(all):
             output = [min,item[1]]
     return output
 class SA:
-    def __init__(self, initial_place,initial_dis, iter=30, T0=10, Tf=0.1, alpha=0.99):
+    def __init__(self, initial_place,initial_dis,ads, iter=30, T0=10, Tf=0.1, alpha=0.99):
         self.start_place = initial_place
         self.start_res = initial_dis
         self.iter = iter  # 内循环迭代次数,即为L =100
@@ -67,6 +68,7 @@ class SA:
         self.placement = []
         self.dis = []
         self.most_best = []
+        self.ads = ads
         """
         random()这个函数取0到1之间的小数
         如果你要取0-10之间的整数（包括0和10）就写成 (int)random()*11就可以了，11乘以零点多的数最大是10点多，最小是0点多
@@ -112,7 +114,7 @@ class SA:
                 place_new[change_x_y[0]] = place_new[change_x_y[1]]
                 place_new[change_x_y[1]] = tool
                 # print("new placement:",place_new)
-                result = dis_cal(place_new)
+                result = dis_cal(place_new,self.ads)
                 # print("计算：",dis_cal(place_new))
                 # print("结果：",result)
                 f_new = result[0]

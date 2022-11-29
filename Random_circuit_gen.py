@@ -1,3 +1,4 @@
+import copy
 import random
 
 
@@ -24,12 +25,18 @@ def Random_gates(qubit_num,gate_num):
     gate_list = []
     while len(gate_list) < gate_num:
         gate = random.sample(range(0, qubit_num), 2)
-        not_in = True
-        for item in gate_list:
-            if gate == item:
-                not_in = False
-        if not_in:
+        print(gate)
+        # print("random",gate)
+        mid = [gate[1],gate[0]]
+        if gate not in gate_list and mid not in gate_list:
             gate_list.append(gate)
+        # print(gate_list)
+        # for gate in gate_list:
+        #     mid = copy.deepcopy(gate)
+        #     gate_t = [mid[1],mid[0]]
+        #     if gate_t in gate_list:
+        #         print("... can not compute...")
+                # raise Exception("... can not compute...")
 
     return gate_list
 
@@ -38,4 +45,5 @@ def Random_gates(qubit_num,gate_num):
 
 if __name__ == '__main__':
     # print(Random_gates(9,3))
-    Circuit_txt(9,3)
+    list = Circuit_txt(9,20)
+    print(list)

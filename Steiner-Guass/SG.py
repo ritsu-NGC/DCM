@@ -31,16 +31,37 @@ def getTar(con,matrix):
         if matrix[index][con] == 1:
             tar.append(index)
     return war,tar
+# def getFollow(con,matrix):
+#     list = []
+#     for index in range(con,9):
+#         if matrix[con][index] == 1:
+#             list.append(index)
+#     for index in range(len(list)):
+#         list[index] = 8 - int(list[index])
+#     return list
+#     tar =8 - con
+#     for item in list:
+
+
+
+
 
 def collect_map(con,tar):
     final = []
     if len(tar) == 1:
+        print("only one gate")
         step1 = get_all_branches(con,tar)
         step2 = get_steiner(step1)
-        step3 = step2[0][0]
+        print("one,step2:",step2)
+        step3 = step2[0]
+        tree = step3[0]
+        for item in step3:
+            if len(item) < len(tree):
+                tree = item
+        print("one,step3",tree)
         # print(step3)
         # print( "step4",Gauss_map(step3, tar))
-        step4 = Gauss_map(step3, tar)
+        step4 = Gauss_map(tree, tar)
         # print("step5", Gauss_map2(step4, tar))
         final = Gauss_map2(step4, tar)
     else:
@@ -69,21 +90,42 @@ def St_down(matrix):
     leng = len(matrix)
     count = 0
     # print(leng)
+    list = []
     for index in range(leng):
         con = index
         war = getTar(con,matrix)[0]
         if war == 0:
-            raise Exception("... control bit is 0...")
+            # raise Exception("... control bit is 0...")
+            inpu = input("control bit is 0，请输入操作：")
+            inpu2 = inpu.split()
+            kk = []
+            for index in range(len(inpu2)):
+                kk.append([int(inpu2[index][1]), int(inpu2[index][3])])
+            count = count + len(kk)
+            count = copy.deepcopy(count)
+            print(count)
+            matrix = colum_cal(matrix, kk)
+            matrix2 = copy.deepcopy(matrix)
+            for line in matrix2:
+                print(line)
+            print(count)
+            list.append(count)
+            continue
         tar = getTar(con,matrix)[1]
+        if tar == []:
+            continue
         operation = collect_map(con,tar)
-        print(operation)
-        count = count + len(operation)
+        print("op",operation)
+        print(type(operation))
+        count = copy.deepcopy(count + len(operation))
         print(count)
         matrix = colum_cal(matrix,operation)
         for line in matrix:
             print(line)
         print(count)
+        list.append(count)
         print("....................{0}..........................".format(index))
+    return matrix,list
 
 def matrix_rever(matrix):
     for row in matrix:
@@ -98,24 +140,38 @@ def St_up(matrix):
     for it in matrix:
         print(it)
     leng = len(matrix)
-
     count = 0
+    list = []
     print(leng)
     for index in range(leng):
         con = index
         war = getTar(con, matrix)[0]
         if war == 0:
-            raise Exception("... control bit is 0...")
+            # raise Exception("... control bit is 0...")
+            inpu = input("control bit is 0，请输入操作：")
+            inpu2 = inpu.split()
+            kk = []
+            for index in range(len(inpu2)):
+                kk.append([int(inpu2[index][1]), int(inpu2[index][3])])
+            count = count + len(kk)
+            count = copy.deepcopy(count)
+            print(count)
+            matrix = colum_cal(matrix, kk)
+            matrix2 = copy.deepcopy(matrix)
+            matrix2 = matrix_rever(matrix2)
+            for line in matrix2:
+                print(line)
+            print(count)
+            list.append(count)
+            continue
         tar = getTar(con, matrix)[1]
         if tar == []:
             continue
         operation = collect_map(con, tar)
-        print(operation)
-        # operation_r = copy.deepcopy(operation)
-        # for item in operation_r:
-        #     item.reverse()
-        # print(operation_r)
+        print("op",operation)
+
         count = count + len(operation)
+        count = copy.deepcopy(count)
         print(count)
         matrix = colum_cal(matrix, operation)
         matrix2 = copy.deepcopy(matrix)
@@ -123,34 +179,44 @@ def St_up(matrix):
         for line in matrix2:
             print(line)
         print(count)
-
+        list.append(count)
         print("....................{0}..........................".format(index))
-
+    return matrix,list
 
 
 
 if __name__ == '__main__':
-    # matrix = [
-    #  [1, 0, 0, 0, 1, 0, 1, 0, 0],
-    #  [0, 1, 0, 0, 1, 0, 0, 0, 0],
-    #  [0, 0, 1, 0, 1, 0, 1, 0, 0],
-    #  [1, 0, 1, 1, 0, 0, 0, 0, 0],
-    #  [0, 0, 0, 1, 1, 1, 1, 1, 1],
-    #  [0, 0, 1, 0, 0, 1, 0, 0, 0],
-    #  [0, 0, 0, 1, 0, 1, 1, 0, 0],
-    #  [0, 1, 0, 0, 0, 0, 0, 1, 0],
-    #  [0, 0, 0, 1, 0, 0, 1, 0, 1]]
-    # St_down(matrix)
-    matrix = [[1, 0, 0, 0, 1, 0, 1, 0, 0],
-              [0, 1, 0, 0, 1, 0, 0, 0, 0],
-              [0, 0, 1, 0, 1, 0, 1, 0, 0],
-              [0, 0, 0, 1, 0, 0, 0, 0, 0],
-              [0, 0, 0, 0, 1, 1, 1, 1, 1],
-              [0, 0, 0, 0, 0, 1, 1, 1, 1],
-              [0, 0, 0, 0, 0, 0, 1, 0, 0],
-              [0, 0, 0, 0, 0, 0, 0, 1, 1],
-              [0, 0, 0, 0, 0, 0, 0, 0, 1]]
-    St_up(matrix)
+    matrix = [
+[1, 0, 0, 0, 0, 0, 0, 0, 0],
+[0, 1, 1, 0, 0, 0, 0, 0, 0],
+[0, 0, 1, 0, 1, 0, 0, 1, 1],
+[0, 1, 0, 1, 0, 1, 0, 1, 1],
+[0, 0, 0, 0, 1, 0, 0, 0, 0],
+[0, 1, 0, 1, 0, 1, 1, 0, 1],
+[0, 0, 0, 0, 0, 0, 0, 0, 1],
+[0, 0, 0, 0, 0, 0, 0, 1, 0],
+[0, 0, 0, 0, 0, 0, 1, 1, 1],]
+    # list = input()
+    # list2 = list.split()
+    # gate = []
+    # for index in range(len(list2)):
+    #     gate.append([int(list2[index][1]),int(list2[index][3])])
+
+
+    result = St_down(matrix)
+    # print("res", result)
+    # if len(result[1]) > 0:
+    #     count = result[1].pop()
+    # else:
+    #     count = 0
+    # upper_matrix = result[0]
+    # result = St_up(upper_matrix)
+    # if len(result[1]) > 0:
+    #     count = count + result[1].pop()
+    # print("cnot gates:", count)
+
+
+    # St_up(matrix)
     # print("tar:",getTar(0,matrix))
     # con = 0
     # tar = getTar(0,matrix)[1]

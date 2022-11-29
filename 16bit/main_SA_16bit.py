@@ -35,7 +35,7 @@ def get_new_cir_list(list,old_cir):
     data = list
     print("SA后新排列:",data)
     r2 = open(old_cir, "r")
-    w = open("Mnew_cir.txt","w")
+    w = open("../Mnew_cir.txt", "w")
     for line in r2.readlines():
         gate = line.split()
         if gate[0] == "CNOT":

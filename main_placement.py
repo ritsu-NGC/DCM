@@ -1,89 +1,53 @@
 from Random_circuit_gen import *
 from get_circuit import *
 from Matrix_gen import *
+from main_SA import *
+from SG import *
 from Steriner_Gauss import *
-
 if __name__ == '__main__':
+    n = "10"
+    ig = "30"
+    ads = "C:\\Users\\apple\\OneDrive\\デスクトップ\\example"+ig+"gates\\"+n+"\\all.txt"
+    w = open(ads,"a",encoding="UTF-8")
     # 将placement算法得到的新回路
     # 计算距离
     # 生成矩阵
-    address_placement = "test_new_out.txt (5).layout" # 新placement文件名
-    get_new_cir(address_placement, "test_new.txt")
+    ads_init = "C:\\Users\\apple\\OneDrive\\デスクトップ\\example"+ig+"gates\\initial\\"+n+".txt"
+    ads_place = "C:\\Users\\apple\\OneDrive\\デスクトップ\\example"+ig+"gates\\placement\\"+n+".layout"
+    # address_placement = ads_place # 新placement文件名
+    get_new_cir(ads_place, ads_init)
     # 计算距离
-    print("placement得到新回路的距离", get_dis("Mnew_cir.txt"))
+    initial_place = get_initial(ads_place)
+    w.write("排列: " + str(initial_place) + "\n")
+    distance = get_dis("Mnew_cir.txt")
+    print("placement得到新回路的距离", distance)
+    w.write("distance: " + str(distance)+"\n")
     # 生成placement新回路的矩阵
     print("获取placement回路矩阵------------------------------------------------------------------------")
     qnum = 9        #量子ビット数
-    cnot_count = 18 #CNOTゲート数
+    cnot_count = 25 #CNOTゲート数
     address = "Mnew_cir.txt"
     # 输出记录方便
     for item in Matrix_trans(gen_circuit_ex(qnum, address)):
-        print(item)
+        print(str(item)+",")
+        w.write(str(item)+","+"\n")
     matrix_initial = Matrix_trans(gen_circuit_ex(qnum, address))
-
-    print("steiner gauss====------------------------------------------------------------------------")
-    n = 9
-    count = 18
-    data = np.array(matrix_initial)
-    print(data)
-    targets = []
-    trans = []
-# convert to upper triangular matrix
-    seq = np.arange(n)
-    for j in seq:     # scan columns
-        targets.clear()
-        for i in np.arange(n):    # scan rows
-            if j == i:
-                fr = i
-                # if data[i][j] == 0:
-                #     targets.append(i)
-            if data[i][j] == 1 and i > j:    # only lower triangular is considered
-                targets.append(i)
-        bestRoute = runAll(n, fr, targets)
-        # bestRoute = list(map(lambda x: list(map(lambda y: {y: data[y][j]}, x)), _bestRoute))
-        print("今の実行する列：{}列目".format(j), bestRoute)
-
-        if (data[j][j] == 1):    #if the start spot is 1
-            L2 = guassLower(data, j, bestRoute)
-        else:                    # if the start spot is 0
-            L2 = handleZeroStart(data, j, bestRoute)
-            _L2 = guassLower(data, j, bestRoute)
-            L2.extend(_L2)
-        count += len(L2)
-        trans.append(L2)
-        print("{}列目{}つ変換経路：".format(j, len(L2)), L2)
-        print(data)
-    print("上三角変換の計数:", count, trans)
-    print("上三角行列:")
-    print(data)
-    print("##########################")
+    print("..................initial matrix........................")
 
 
-    seq = sorted(seq, reverse=True)
-    # convert to E matrix
-    for j in seq:     # scan columns
-        targets.clear()
-        for i in np.arange(n):    # scan rows
-            if j == i:
-                fr = i
-                # if data[i][j] == 0:
-                #     targets.append(i)
-            if data[i][j] == 1 and i < j:    # only lower triangular is considered
-                targets.append(i)
-        bestRoute = runAll(n, fr, targets, 1)
-        # bestRoute = list(map(lambda x: list(map(lambda y: {y: data[y][j]}, x)), _bestRoute))
-        print("ターゲットへの経路：{}列目".format(j), bestRoute)
-        if (data[j][j] == 1):  # if the start spot is 1
-            L2 = guassUpper(data, j, bestRoute)
-        else:  # if the start spot is 0
-            L2 = handleZeroStart(data, j, bestRoute)
-            _L2 = guassUpper(data, j, bestRoute)
-            L2.extend(_L2)
-        count += len(L2)
-        trans.append(L2)
-        print("{}列目{}つ変換経路：".format(j, len(L2)), L2)
-        print(data)
-    print("CNOTゲートの計数:", count, trans)
-    print("単位行列:")
-    print(data)
 
+
+    result = St_down(matrix_initial)
+    print("res", result)
+    if len(result[1]) > 0:
+        count = result[1].pop()
+    else:
+        count = 0
+
+    upper_matrix = result[0]
+    result = St_up(upper_matrix)
+    if len(result[1]) > 0:
+        count = count + result[1].pop()
+    print("cnot gates:", count)
+
+    w.write("num of cnot gates:" + str(count)+"\n")
