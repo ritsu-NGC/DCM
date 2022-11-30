@@ -1,4 +1,3 @@
-find it
 .qubit 9
 qubit q0
 qubit q1
@@ -10,9 +9,34 @@ qubit q6
 qubit q7
 qubit q8
 .begin
-CNOT q8 q5
-CNOT q8 q2
+CNOT q0 q4
+CNOT q0 q5
+CNOT q7 q2
+CNOT q4 q8
+CNOT q3 q8
+CNOT q2 q0
+CNOT q5 q8
+CNOT q5 q1
+CNOT q3 q6
+CNOT q1 q3
+CNOT q4 q5
+CNOT q7 q1
+CNOT q8 q0
+CNOT q0 q7
+CNOT q6 q0
+CNOT q4 q6
+CNOT q1 q8
+CNOT q8 q7
 CNOT q7 q4
-CNOT q5 q7
-CNOT q6 q2
+CNOT q8 q2
+CNOT q2 q1
+CNOT q2 q4
+CNOT q1 q0
+CNOT q0 q3
+CNOT q1 q4
+CNOT q6 q8
+CNOT q5 q2
+CNOT q3 q7
+CNOT q3 q4
+CNOT q7 q5
 .end
