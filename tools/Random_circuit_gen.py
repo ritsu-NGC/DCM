@@ -1,6 +1,6 @@
 import copy
 import random
-
+    # randomly generate circuits and get a txt of circuits
 
 def Circuit_txt(qubit_num,gate_num):
     w = open("test_new.txt","w")

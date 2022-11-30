@@ -1,23 +1,7 @@
 import pythonds
 from qiskit import *
-from Graph import *
 from distance_cal import *
-
-def get_circuit(circuit):
-    num_qubit = len(circuit.qubits)
-    gates_ctl = []
-    gates_tar = []
-    gate_graph = Graph()
-    for qubit in range(num_qubit):
-        gate_graph.addVertex(qubit)
-    for gate in circuit.data:
-        if gate.operation.name == "cx":
-            gate_graph.addEdge(gate.qubits[0].index,gate.qubits[1].index)
-
-            gates_ctl.append(gate.qubits[0].index)
-            gates_tar.append(gate.qubits[1].index)
-
-    return gate_graph
+# basing new layouts and initial circuit to generate new circuits
 
 def circuit_txt(name,circuit):
     # print(circuit.qubits)
@@ -45,7 +29,7 @@ def get_new_cir(new_cir,old_cir):
     data[5] = mid
     print("新排列：",data)
     r2 = open(old_cir, "r")
-    w = open("Mnew_cir.txt","w")
+    w = open("../Mnew_cir.txt", "w")
     for line in r2.readlines():
         gate = line.split()
         if gate[0] == "CNOT":
@@ -76,7 +60,7 @@ def get_new_cir_16bit(new_cir,old_cir):
 
     print("新排列：",data)
     r2 = open(old_cir, "r")
-    w = open("Mnew_cir.txt","w")
+    w = open("../Mnew_cir.txt", "w")
     for line in r2.readlines():
         gate = line.split()
         if gate[0] == "CNOT":
@@ -127,7 +111,7 @@ if __name__ == '__main__':
     # get_new_cir_16bit("test_new_out.txt (18).layout","test_new.txt")
     # print("距离:",get_dis("test_new.txt"))
     # print("现距离",get_dis("Mnew_cir.txt"))
-    r = open("Mnew_cir.txt","r")
+    r = open("../Mnew_cir.txt", "r")
     # print(r.read())
     gate_list = r.readlines()
     for item in gate_list:

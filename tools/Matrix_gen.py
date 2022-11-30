@@ -1,6 +1,7 @@
 
 import numpy as np
 
+# basing txt of circuits to generate the matrix
 
 def cnotgate(qc, con, tar):
     return qc.cx(con, tar)

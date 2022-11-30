@@ -1,0 +1,32 @@
+.qubit 9
+qubit q0
+qubit q1
+qubit q2
+qubit q3
+qubit q4
+qubit q5
+qubit q6
+qubit q7
+qubit q8
+.begin
+CNOT q8 q4
+CNOT q2 q8
+CNOT q5 q8
+CNOT q4 q5
+CNOT q4 q0
+CNOT q2 q7
+CNOT q2 q5
+CNOT q2 q0
+CNOT q5 q7
+CNOT q0 q5
+CNOT q3 q7
+CNOT q8 q7
+CNOT q0 q8
+CNOT q5 q1
+CNOT q1 q4
+CNOT q8 q6
+CNOT q8 q1
+CNOT q6 q2
+CNOT q1 q7
+CNOT q3 q0
+.end

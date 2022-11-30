@@ -1,4 +1,4 @@
-from Random_circuit_gen import *
+from main.Random_circuit_gen import *
 from get_circuit import *
 from Matrix_gen import *
 from Steriner_Gauss import *

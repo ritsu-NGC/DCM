@@ -1,7 +1,7 @@
 from SA import *
 from get_circuit import *
 from Matrix_gen import *
-from Steriner_Gauss import *
+
 from SG import *
 def get_initial(address_initial):
     r1 = open(address_initial,"r")
@@ -42,11 +42,15 @@ def get_new_cir_list(list,old_cir):
 
 
 if __name__ == '__main__':
+    # this is calculate the distance and number of CNOT gates of the most optimal layouts by Simulated Annealing
     n = "10"
     ig = "30"
+
+    # address of output
     ads = "C:\\Users\\apple\\OneDrive\\デスクトップ\\example"+ig+"gates\\"+n+"\\all.txt"
     w = open(ads, "a" ,encoding="UTF-8")
-    # 获取SA的初始解
+
+    # get initial layouts getting by PAQCS
     address_initial = "C:\\Users\\apple\\OneDrive\\デスクトップ\\example"+ig+"gates\\placement\\"+n+".layout"
     ads_init = "C:\\Users\\apple\\OneDrive\\デスクトップ\\example"+ig+"gates\\initial\\"+n+".txt"
     initial_place = get_initial(address_initial)
@@ -56,31 +60,44 @@ if __name__ == '__main__':
     # w.write("原距离和: " + str(initial_dis) + "\n")
     # 开始S
 
-    # 输出距离和新排列
+    # index  perform times of SA
     for index in range(0,1):
         count = 0
         print("index:",index)
         w.write("index: " + str(index) + "\n")
+
+        # perform SA
         sa = SA(initial_place, initial_dis,ads = ads_init )
+        # get all accepted layouts
         sarun = sa.run()
         print("all",sarun)
 
+        # find the layouts with minimun distance
         SA_dis_pla = GetMin(sarun)
         print("SA后最优解")
         print(SA_dis_pla)
+
+        # print optimal layout and distance
         w.write("新距离和和新排列: " + str(SA_dis_pla) + "\n")
         SA_pla = SA_dis_pla[1]
+
+        # generate new circuit of the optimal layouts
         get_new_cir_list(SA_pla,ads_init)
         print("SA得到新回路的距离：", get_dis("Mnew_cir.txt"))
         print("获取SA回路矩阵------------------------------------------------------------------------")
+
+
         qnum = 9        #量子ビット数
+        # address of new circuit
         address = "Mnew_cir.txt"
-    # 输出记录方便
+
+        #  get matrix of circuit and print
         for item in Matrix_trans(gen_circuit_ex(qnum, address)):
             print(str(item)+",")
             w.write(str(item) +"," + "\n")
         matrix_initial = Matrix_trans(gen_circuit_ex(qnum, address))
 
+        # perform steiner gauss elimination and calculate the number of cnot gates
         print("steiner gauss====------------------------------------------------------------------------")
         result = St_down(matrix_initial)
         print("res", result)
